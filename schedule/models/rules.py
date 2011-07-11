@@ -1,7 +1,5 @@
 from django.db import models
-from django.utils.translation import ugettext, ugettext_lazy as _
-
-from dateutil import rrule
+from django.utils.translation import ugettext_lazy as _
 
 RRULE_WEEKDAYS = {"MO":0,"TU":1,"WE":2,"TH":3,"FR":4,"SA":5,"SU":6}
 
@@ -45,7 +43,7 @@ class Rule(models.Model):
     name = models.CharField(_("name"), max_length=32)
     description = models.TextField(_("description"))
     frequency = models.CharField(_("frequency"), choices=freqs, max_length=10)
-    params = models.TextField(_("params"), null=True, blank=True)
+    params = models.TextField(_("params"), null=True, blank=True, help_text=_("Extra parameters to define this type of recursion. Should follow this format: rruleparam:value;otherparam:value."))
 
     class Meta:
         verbose_name = _('rule')
