@@ -1,4 +1,5 @@
 from django.db import models
+from dateutil import rrule
 from django.utils.translation import ugettext_lazy as _
 
 RRULE_WEEKDAYS = {"MO":0,"TU":1,"WE":2,"TH":3,"FR":4,"SA":5,"SU":6}
