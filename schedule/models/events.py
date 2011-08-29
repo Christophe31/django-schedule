@@ -38,7 +38,7 @@ class Event(models.Model):
         verbose_name = _('event')
         verbose_name_plural = _('events')
         app_label = 'schedule'
-	get_latest_by = 'start' 
+	get_latest_by = 'start'
 
     def __unicode__(self):
         date_format = u'l, %s' % ugettext("DATE_FORMAT")
@@ -158,7 +158,7 @@ class Event(models.Model):
         difference = self.end - self.start
         while True:
             o_start = date_iter.next()
-            if o_start > self.end_recurring_period:
+            if self.end_recurring_period is not None and o_start > self.end_recurring_period:
                 raise StopIteration
             o_end = o_start + difference
             if o_end > after:
@@ -175,11 +175,11 @@ class Event(models.Model):
         while True:
             next = generator.next()
             yield occ_replacer.get_occurrence(next)
-    
+
     def next_occurrence(self):
         for o in self.occurrences_after():
             return o
-    
+
 
 class EventRelationManager(models.Manager):
     '''
